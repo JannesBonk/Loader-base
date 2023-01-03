@@ -38,8 +38,8 @@ bool inject(DWORD pid, const char* dll)
 DWORD GetModule(DWORD pid, const char* name)
 {
 	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
-	MODULEENTRY32A mEntry;
-	mEntry.dwSize = sizeof(MODULEENTRY32A);
+	MODULEENTRY32 mEntry;
+	mEntry.dwSize = sizeof(MODULEENTRY32);
 	do
 	{
 		if (!strcmp(mEntry.szModule, name))
