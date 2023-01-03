@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <wininet.h>
 #include <iostream>
 #include <string>
 #include <format>
@@ -48,7 +49,7 @@ DWORD GetModule(DWORD pid, const char* name)
 }
 
 void main() noexcept
-{
+{	
 	//optional
 	//SetConsoleTitleA("You can set a console title");
 	int menuValue;
@@ -73,8 +74,21 @@ void main() noexcept
 	//Opening the module to get client.dll needed for cheat to work
 	process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
 	clientDLL = GetModule(pid, "client.dll");
+	bool checkNetworkConnection = false;
+	//Using the include wininet.h we ping google and return true if it was succesful else we do not
+	if(InternetCheckConnection("http://www.google.com",FLAG_ICC_FORCE_CONNECTION,0))
+	{
+        	checkNetworkConnection = true;
+	}
 	if (menuValue == 1)
 	{	
+		//If the user doesnt have any internet connection, we show a message then close loader
+		if (checkNetworkConnection != true)
+		{
+			cout << "No internet connection detected! Cannot download DLL" << endl;
+			system("pause");
+			return;
+		}		
 		//Check if csgo is running
 		HWND status = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
 		//Here we get the PID ( process id ) 
