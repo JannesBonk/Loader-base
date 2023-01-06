@@ -61,7 +61,7 @@ void main() noexcept
 	URLDownloadToFileA(NULL, "You put your download link here", "Change this to where you want to download your dll", 0, NULL);	
 	//Sleeping before showing makes loader/cmd look cooler
 	Sleep(200);
-	cout << "Injector made by youtube.com/JanesBonk or Jannes#7012" << endl;
+	cout << "Injector made by youtube.com/JanesBonk or JannesBonk#7012" << endl;
 	Sleep(50);
 	cout << "[1] Inject" << endl;
 	Sleep(50);
